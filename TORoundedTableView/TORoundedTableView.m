@@ -185,11 +185,7 @@ static inline void TORoundedTableViewResizeAccessoryView(UITableViewHeaderFooter
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
-    if (self.traitCollection.horizontalSizeClass != UIUserInterfaceSizeClassRegular) {
-        return;
-    }
-
+    
     // Work out the width of the column
     // Loop through every subview related to 'UITableView' and resize it
     // ----
@@ -218,7 +214,7 @@ static inline void TORoundedTableViewResizeAccessoryView(UITableViewHeaderFooter
     // Annoying hack. While other views automatically resize/reposition when adjusting between size classes,
     // the table footer view doesn't move back to its origin of 0.0
     // This forcibly resets the position of the footer view
-    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact && self.tableFooterView) {
+    if (self.tableFooterView) {
         CGRect frame = self.tableFooterView.frame;
         frame.origin.x = 0.0f;
         self.tableFooterView.frame = frame;

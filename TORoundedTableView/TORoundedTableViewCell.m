@@ -30,7 +30,6 @@ static Class _tableViewClass = NULL;
 - (void)setFrame:(CGRect)frame
 {
     if (!_tableViewClass) { _tableViewClass = [TORoundedTableView class]; }
-    BOOL horizontalRegular = self.traitCollection.horizontalSizeClass != UIUserInterfaceSizeClassCompact;
 
     /** On iOS 10 and down, table cells are kept in `UItableViewWrapperView`,
      which abstracts away our control of the frame from `TORoundedTableView`.
@@ -40,7 +39,7 @@ static Class _tableViewClass = NULL;
      On iOS 11, that is no longer the case. Cells are direct subviews of the table view.
      As such, this isn't necessary anymore.
      */
-    if (![self.superview isKindOfClass:_tableViewClass] && horizontalRegular) {
+    if (![self.superview isKindOfClass:_tableViewClass]) {
         frame.size.width = self.superview.frame.size.width;
     }
 

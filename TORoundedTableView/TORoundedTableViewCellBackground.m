@@ -98,8 +98,6 @@ typedef NS_ENUM(NSInteger, TORoundedTableViewCellBackgroundCorner) {
 {
     [super layoutSubviews];
     
-    BOOL isCompactSizeClass = (self.superview.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact);
-    
     CABasicAnimation *resizeAnimation = (CABasicAnimation *)[self.layer animationForKey:@"bounds.size"];
     if (resizeAnimation == nil) {
         resizeAnimation = (CABasicAnimation *)[self.layer animationForKey:@"bounds"];
@@ -116,11 +114,11 @@ typedef NS_ENUM(NSInteger, TORoundedTableViewCellBackgroundCorner) {
     CALayer *topRightCornerLayer = self.cornerLayers[TORoundedTableViewCellBackgroundCornerTopRight];
     CALayer *topLayer = self.layers[TORoundedTableViewCellBackgroundViewTop];
     
-    topLeftCornerLayer.hidden  = !self.topCornersRounded || isCompactSizeClass;
-    topRightCornerLayer.hidden = !self.topCornersRounded || isCompactSizeClass;
-    topLayer.hidden            = !self.topCornersRounded || isCompactSizeClass;
+    topLeftCornerLayer.hidden  = !self.topCornersRounded;
+    topRightCornerLayer.hidden = !self.topCornersRounded;
+    topLayer.hidden            = !self.topCornersRounded;
     
-    if (self.topCornersRounded && !isCompactSizeClass) {
+    if (self.topCornersRounded) {
         frame = (CGRect){CGPointZero, cornerLayerSize};
         [self animateLayer:topLeftCornerLayer forNewFrame:frame fromAnimation:resizeAnimation];
         topLeftCornerLayer.frame = frame;
@@ -140,12 +138,12 @@ typedef NS_ENUM(NSInteger, TORoundedTableViewCellBackgroundCorner) {
     
     // Layout out the middle rect
     frame = self.bounds;
-    if (self.topCornersRounded && !isCompactSizeClass) {
+    if (self.topCornersRounded) {
         frame.origin.y += cornerLayerSize.height;
         frame.size.height -= cornerLayerSize.height;
     }
     
-    if (self.bottomCornersRounded && !isCompactSizeClass) {
+    if (self.bottomCornersRounded) {
         frame.size.height -= cornerLayerSize.height;
     }
     
@@ -157,11 +155,11 @@ typedef NS_ENUM(NSInteger, TORoundedTableViewCellBackgroundCorner) {
     CALayer *bottomRightCornerLayer = self.cornerLayers[TORoundedTableViewCellBackgroundCornerBottomRight];
     CALayer *bottomLayer            = self.layers[TORoundedTableViewCellBackgroundViewBottom];
     
-    bottomLeftCornerLayer.hidden    = !self.bottomCornersRounded || isCompactSizeClass;
-    bottomRightCornerLayer.hidden   = !self.bottomCornersRounded || isCompactSizeClass;
-    bottomLayer.hidden              = !self.bottomCornersRounded || isCompactSizeClass;
+    bottomLeftCornerLayer.hidden    = !self.bottomCornersRounded;
+    bottomRightCornerLayer.hidden   = !self.bottomCornersRounded;
+    bottomLayer.hidden              = !self.bottomCornersRounded;
     
-    if (self.bottomCornersRounded && !isCompactSizeClass) {
+    if (self.bottomCornersRounded) {
         frame = self.bounds;
         frame.origin.y = boundsSize.height - cornerLayerSize.height;
         frame.size = cornerLayerSize;
