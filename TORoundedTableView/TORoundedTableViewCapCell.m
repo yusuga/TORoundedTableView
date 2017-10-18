@@ -159,4 +159,10 @@
     self.backgroundView.bottomCornersRounded = _bottomCornersRounded;
 }
 
+- (void)setRoundedCornerBackgroundColor:(UIColor *)backgroundColor {
+    self.backgroundView.roundedCornerImage = [TORoundedTableView roundedCornerImageWithRadius:self.tableView.sectionCornerRadius
+                                                                                        color:backgroundColor];
+    self.backgroundView.backgroundColor = backgroundColor;
+}
+
 @end

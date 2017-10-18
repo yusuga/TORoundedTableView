@@ -44,4 +44,6 @@
 /** The default background color of each cell when tapped (Default color is light grey) */
 @property (nonatomic, strong) UIColor *cellSelectedBackgroundColor;
 
++ (UIImage *)roundedCornerImageWithRadius:(CGFloat)radius color:(UIColor *)color;
+
 @end
